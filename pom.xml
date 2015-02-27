@@ -3,27 +3,33 @@
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
-    <groupId>com.oneandone.sales.tools.maven.poms</groupId>
-    <artifactId>application-parent</artifactId>
-    <version>3.5.30</version>
+    <groupId>net.oneandone.maven.poms</groupId>
+    <artifactId>foss-parent</artifactId>
+    <version>1.5.1</version>
+    <relativePath />
   </parent>
 
-  <name>Hello World War</name>
+  <name>Hello World Servlet</name>
   <description>Servlet to print hello world</description>
   <groupId>com.oneandone.sales.tools.maven</groupId>
   <artifactId>hellowar</artifactId>
-  <version>1.1.9-SNAPSHOT</version>
+  <version>1.0.0-SNAPSHOT</version>
   <packaging>war</packaging>
   <properties>
-    <wsd.monitoring>todo</wsd.monitoring>
-    <wsd.sod>todo</wsd.sod>
-    <wsd.ypid>24349</wsd.ypid>
+    <enforcer.skip>true</enforcer.skip>
+    <pmd.skip>true</pmd.skip>
+    <cpd.skip>true</cpd.skip>
+    <findbugs.skip>true</findbugs.skip>
+    <jacoco.skip>true</jacoco.skip>
+    <netbeans.hint.jdkPlatform>JDK_1.7</netbeans.hint.jdkPlatform>
+    <maven-checkstyle-plugin.suppressionsLocation>${basedir}/src/conf/checkstyle-suppressions.xml</maven-checkstyle-plugin.suppressionsLocation>
   </properties>
 
   <scm>
-    <connection>scm:svn:${project.scm.url}</connection>
-    <developerConnection>scm:svn:${project.scm.url}</developerConnection>
-    <url>https://svn.1and1.org/svn/sales/tools/maven/hellowar/trunk</url>
+    <connection>scm:git:ssh://git@github.com/mlhartme/hellowar.git</connection>
+    <developerConnection>scm:git:ssh://git@github.com/mlhartme/stool.git</developerConnection>
+    <url>https://github.com/mlhartme/stool</url>
+    <tag>HEAD</tag>
   </scm>
 
   <developers>
@@ -43,70 +49,5 @@
       <version>2.5</version>
       <scope>provided</scope>
     </dependency>
-    <dependency>
-      <groupId>com.oneandone.sales.tools.maven</groupId>
-      <artifactId>hello</artifactId>
-      <version>2.0.5</version>
-    </dependency>
   </dependencies>
-  <build>
-    <plugins>
- <!--     <plugin>
-        <groupId>net.oneandone.maven.plugins</groupId>
-        <artifactId>prerelease</artifactId>
-        <version>1.7.0-SNAPSHOT</version>
-        <configuration>
-          <allowPrereleaseSnapshots>true</allowPrereleaseSnapshots>
-        </configuration>
-      </plugin>
--->
-      <plugin>
-        <groupId>org.pustefixframework.maven.plugins</groupId>
-        <artifactId>pustefix-statuscode-plugin</artifactId>
-        <executions>
-          <execution>
-            <phase>none</phase>
-          </execution>
-        </executions>
-      </plugin>
-
-      <plugin>
-        <groupId>org.pustefixframework.maven.plugins</groupId>
-        <artifactId>pustefix-iwrapper-plugin</artifactId>
-        <executions>
-          <execution>
-            <phase>none</phase>
-          </execution>
-        </executions>
-      </plugin>
-      <plugin>
-        <groupId>org.pustefixframework.maven.plugins</groupId>
-        <artifactId>pustefix-resourceindex-plugin</artifactId>
-        <executions>
-          <execution>
-            <phase>none</phase>
-          </execution>
-        </executions>
-      </plugin>
-      <plugin>
-        <groupId>org.pustefixframework.maven.plugins</groupId>
-        <artifactId>pustefix-webapp-plugin</artifactId>
-        <executions>
-          <execution>
-            <phase>none</phase>
-          </execution>
-        </executions>
-      </plugin>
-      <plugin>
-        <groupId>org.pustefixframework.maven.plugins</groupId>
-        <artifactId>pustefix-generate-plugin</artifactId>
-        <version>${pustefix.version}</version>
-        <executions>
-          <execution>
-            <phase>none</phase>
-          </execution>
-        </executions>
-      </plugin>
-    </plugins>
-  </build>
 </project>
