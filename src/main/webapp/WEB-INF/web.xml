@@ -6,7 +6,7 @@
 
   <servlet>
     <servlet-name>hellowar</servlet-name>
-    <servlet-class>com.oneandone.sales.tools.maven.hellowar.HelloWar</servlet-class>
+    <servlet-class>net.oneandone.hellowar.HelloWar</servlet-class>
     <load-on-startup>1</load-on-startup>
   </servlet>
   <servlet-mapping>

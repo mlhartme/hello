@@ -11,7 +11,7 @@
 
   <name>Hello World Servlet</name>
   <description>Servlet to print hello world</description>
-  <groupId>com.oneandone.sales.tools.maven</groupId>
+  <groupId>net.oneandone</groupId>
   <artifactId>hellowar</artifactId>
   <version>1.0.0-SNAPSHOT</version>
   <packaging>war</packaging>
@@ -27,8 +27,8 @@
 
   <scm>
     <connection>scm:git:ssh://git@github.com/mlhartme/hellowar.git</connection>
-    <developerConnection>scm:git:ssh://git@github.com/mlhartme/stool.git</developerConnection>
-    <url>https://github.com/mlhartme/stool</url>
+    <developerConnection>scm:git:ssh://git@github.com/mlhartme/hellowar.git</developerConnection>
+    <url>https://github.com/mlhartme/hellowar</url>
     <tag>HEAD</tag>
   </scm>
 

@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.oneandone.sales.tools.maven.hellowar;
+package net.oneandone.hellowar;
 
 import javax.servlet.http.HttpServlet;
 import java.io.IOException;
