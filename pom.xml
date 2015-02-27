@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>com.oneandone.sales.tools.maven.poms</groupId>
+    <artifactId>application-parent</artifactId>
+    <version>3.5.30</version>
+  </parent>
+
+  <name>Hello World War</name>
+  <description>Servlet to print hello world</description>
+  <groupId>com.oneandone.sales.tools.maven</groupId>
+  <artifactId>hellowar</artifactId>
+  <version>1.1.9-SNAPSHOT</version>
+  <packaging>war</packaging>
+  <properties>
+    <wsd.monitoring>todo</wsd.monitoring>
+    <wsd.sod>todo</wsd.sod>
+    <wsd.ypid>24349</wsd.ypid>
+  </properties>
+
+  <scm>
+    <connection>scm:svn:${project.scm.url}</connection>
+    <developerConnection>scm:svn:${project.scm.url}</developerConnection>
+    <url>https://svn.1and1.org/svn/sales/tools/maven/hellowar/trunk</url>
+  </scm>
+
+  <developers>
+    <developer>
+      <id>mhm</id>
+      <name>Michael Hartmeier</name>
+      <roles>
+        <role>lead</role>
+      </roles>
+    </developer>
+  </developers>
+
+  <dependencies>
+    <dependency>
+      <groupId>javax.servlet</groupId>
+      <artifactId>servlet-api</artifactId>
+      <version>2.5</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.oneandone.sales.tools.maven</groupId>
+      <artifactId>hello</artifactId>
+      <version>2.0.5</version>
+    </dependency>
+  </dependencies>
+  <build>
+    <plugins>
+ <!--     <plugin>
+        <groupId>net.oneandone.maven.plugins</groupId>
+        <artifactId>prerelease</artifactId>
+        <version>1.7.0-SNAPSHOT</version>
+        <configuration>
+          <allowPrereleaseSnapshots>true</allowPrereleaseSnapshots>
+        </configuration>
+      </plugin>
+-->
+      <plugin>
+        <groupId>org.pustefixframework.maven.plugins</groupId>
+        <artifactId>pustefix-statuscode-plugin</artifactId>
+        <executions>
+          <execution>
+            <phase>none</phase>
+          </execution>
+        </executions>
+      </plugin>
+
+      <plugin>
+        <groupId>org.pustefixframework.maven.plugins</groupId>
+        <artifactId>pustefix-iwrapper-plugin</artifactId>
+        <executions>
+          <execution>
+            <phase>none</phase>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.pustefixframework.maven.plugins</groupId>
+        <artifactId>pustefix-resourceindex-plugin</artifactId>
+        <executions>
+          <execution>
+            <phase>none</phase>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.pustefixframework.maven.plugins</groupId>
+        <artifactId>pustefix-webapp-plugin</artifactId>
+        <executions>
+          <execution>
+            <phase>none</phase>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.pustefixframework.maven.plugins</groupId>
+        <artifactId>pustefix-generate-plugin</artifactId>
+        <version>${pustefix.version}</version>
+        <executions>
+          <execution>
+            <phase>none</phase>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+</project>
