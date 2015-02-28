@@ -1,5 +1,5 @@
 .idea
-stool.iml
+*.iml
 target/
 pom.xml.tag
 pom.xml.releaseBackup
