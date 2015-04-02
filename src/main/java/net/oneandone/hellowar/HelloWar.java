@@ -81,5 +81,4 @@ public class HelloWar extends HttpServlet {
         p.load(getClass().getClassLoader().getResourceAsStream("/META-INF/pominfo.properties"));
         return p.getProperty("version");
     }
-
 }
