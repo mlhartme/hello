@@ -16,34 +16,62 @@
 package net.oneandone.hellowar;
 
 import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.Writer;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
 public class HelloWar extends HttpServlet {
-    protected void doGet(javax.servlet.http.HttpServletRequest req, javax.servlet.http.HttpServletResponse resp)
-            throws javax.servlet.ServletException, java.io.IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         Writer writer;
 
-        resp.setContentType("text/html");
-        writer = resp.getWriter();
+        response.setContentType("text/html");
+        writer = response.getWriter();
+        switch (request.getPathInfo()) {
+            case "/properties":
+                list(writer, System.getProperties());
+                break;
+            case "/environment":
+                list(writer, System.getenv());
+                break;
+            default:
+                index(request, writer);
+                break;
+        }
+        writer.close();
+    }
+
+    protected void index(HttpServletRequest request, Writer writer) throws IOException {
         writer.write("<html><body><h1>Hello, World</h1>\n");
         writer.write("<h2>version: " + getVersion() + "</h2>");
-        writer.write("<h2>contextPath: " + req.getContextPath() + "<h2>");
-        writer.write("<h2>pathInfo: " + req.getPathInfo() + "</h2>");
-        writer.write("<h2>requestUri: " + req.getRequestURI() + "</h2>");
-        writer.write("<h2>docroot: " + req.getRealPath("/") + "</h2>");
-        writer.write("<h2>environment</h2>");
-        for (Map.Entry entry : System.getProperties().entrySet()) {
-            writer.write("<p>&#20;&#20;&#20;");
-            writer.write(entry.getKey().toString());
-            writer.write("=");
-            writer.write(entry.getValue().toString());
-            writer.write("</p>");
-        }
+        writer.write("<h2>contextPath: " + request.getContextPath() + "<h2>");
+        writer.write("<h2>pathInfo: " + request.getPathInfo() + "</h2>");
+        writer.write("<h2>requestUri: " + request.getRequestURI() + "</h2>");
+        writer.write("<h2>docroot: " + request.getRealPath("/") + "</h2>");
+        writer.write("<h2><a href='properties'>Properties</a></h2>");
+        writer.write("<h2><a href='environment'>Environment</a></h2>");
         writer.write("</body></html>\n");
-        writer.close();
+    }
+
+    protected void list(Writer writer, Map map) throws IOException {
+        List<String> keys;
+
+        keys = new ArrayList(map.keySet());
+        Collections.sort(keys);
+        writer.write("<ul>");
+        for (String key : keys) {
+            writer.write("<li>");
+            writer.write(key);
+            writer.write("=");
+            writer.write(map.get(key).toString());
+            writer.write("</li>");
+        }
+        writer.write("</ul>");
     }
 
     private String getVersion() throws IOException {
