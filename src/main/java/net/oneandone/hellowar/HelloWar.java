@@ -15,6 +15,7 @@
  */
 package net.oneandone.hellowar;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -27,35 +28,74 @@ import java.util.Map;
 import java.util.Properties;
 
 public class HelloWar extends HttpServlet {
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         Writer writer;
+        String[] cmds;
 
         response.setContentType("text/html");
         writer = response.getWriter();
-        switch (request.getPathInfo()) {
-            case "/properties":
+        cmds = request.getParameterValues("cmd");
+        switch (cmds != null && cmds.length == 1 ? cmds[0] : "") {
+            case "info":
+                info(request, writer);
+                break;
+            case "properties":
                 list(writer, System.getProperties());
                 break;
-            case "/environment":
+            case "environment":
                 list(writer, System.getenv());
                 break;
+            case "statuscode":
+                response.sendError(Integer.parseInt(parameter(request, "code")));
+                break;
+            case "runtimeexception":
+                throw new RuntimeException("demo runtime exception");
+            case "servletexception":
+                throw new ServletException("demo servlet exception");
+            case "ioexception":
+                throw new IOException("demo IO exception");
             default:
-                index(request, writer);
+                index(writer);
                 break;
         }
         writer.close();
     }
 
-    protected void index(HttpServletRequest request, Writer writer) throws IOException {
-        writer.write("<html><body><h1>Hello, World</h1>\n");
+    private String parameter(HttpServletRequest request, String name) {
+        String[] values;
+
+        values = request.getParameterValues(name);
+        switch (values.length) {
+            case 0:
+                return "";
+            case 1:
+                return values[0];
+            default:
+                return "(ambiguous)";
+        }
+    }
+
+    protected void index(Writer writer) throws IOException {
+        writer.write("<html><body><h2>Hello, World</h2>\n");
+        writer.write("<ul>");
+        writer.write("<li><a href='?cmd=info'>Info</a></li>");
+        writer.write("<li><a href='?cmd=properties'>Properties</a></li>");
+        writer.write("<li><a href='?cmd=environment'>Environment</a></li>");
+        writer.write("<li><a href='?cmd=statuscode&code=401'>Status Code</a></li>");
+        writer.write("<li><a href='?cmd=runtimeexception'>RuntimeException</a></li>");
+        writer.write("<li><a href='?cmd=servletexception'>ServletException</a></li>");
+        writer.write("<li><a href='?cmd=servletexception'>ServletException</a></li>");
+        writer.write("</ul>");
+        writer.write("</body></html>\n");
+    }
+
+    private void info(HttpServletRequest request, Writer writer) throws IOException {
         writer.write("<h2>version: " + getVersion() + "</h2>");
         writer.write("<h2>contextPath: " + request.getContextPath() + "<h2>");
         writer.write("<h2>pathInfo: " + request.getPathInfo() + "</h2>");
         writer.write("<h2>requestUri: " + request.getRequestURI() + "</h2>");
         writer.write("<h2>docroot: " + request.getRealPath("/") + "</h2>");
-        writer.write("<h2><a href='properties'>Properties</a></h2>");
-        writer.write("<h2><a href='environment'>Environment</a></h2>");
-        writer.write("</body></html>\n");
+
     }
 
     protected void list(Writer writer, Map map) throws IOException {
