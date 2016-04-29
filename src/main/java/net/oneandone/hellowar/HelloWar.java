@@ -48,20 +48,20 @@ public class HelloWar extends HttpServlet {
                 info(request, writer);
                 break;
             case "create_session":
-                page("Create Session", request, writer, "result", request.getSession(true).getId());
+                page("Create Session", writer, "result", request.getSession(true).getId());
                 break;
             case "invalidate_session":
                 session = request.getSession(false);
                 if (session != null) {
                     session.invalidate();
                 }
-                page("Invalidate Session", request, writer, "result", session == null ? "no session - nothing to do" : "done");
+                page("Invalidate Session", writer, "result", session == null ? "no session - nothing to do" : "done");
                 break;
             case "properties":
-                page("properties", request, writer, sort((Map) System.getProperties()));
+                page("Properties", writer, sort((Map) System.getProperties()));
                 break;
             case "environment":
-                page("environment", request, writer, sort(System.getenv()));
+                page("Environment", writer, sort(System.getenv()));
                 break;
             case "statuscode":
                 response.sendError(Integer.parseInt(parameter(request, "code")));
@@ -73,7 +73,7 @@ public class HelloWar extends HttpServlet {
             case "ioexception":
                 throw new IOException("demo IO exception");
             default:
-                index(writer);
+                page("Home", writer);
                 break;
         }
         writer.close();
@@ -93,24 +93,8 @@ public class HelloWar extends HttpServlet {
         }
     }
 
-    protected void index(Writer writer) throws IOException {
-        writer.write("<html><body><h2>Hello, World!</h2>\n");
-        writer.write("<ul>");
-        writer.write("<li><a href='?cmd=info'>Info</a></li>");
-        writer.write("<li><a href='?cmd=properties'>Properties</a></li>");
-        writer.write("<li><a href='?cmd=environment'>Environment</a></li>");
-        writer.write("<li><a href='?cmd=create_session'>Create Session</a></li>");
-        writer.write("<li><a href='?cmd=invalidate_session'>Invalidate Session</a></li>");
-        writer.write("<li><a href='?cmd=statuscode&code=401'>Status Code</a></li>");
-        writer.write("<li><a href='?cmd=runtimeexception'>throw RuntimeException</a></li>");
-        writer.write("<li><a href='?cmd=servletexception'>throw ServletException</a></li>");
-        writer.write("<li><a href='?cmd=servletexception'>throw ServletException</a></li>");
-        writer.write("</ul>");
-        writer.write("</body></html>\n");
-    }
-
     private void info(HttpServletRequest request, Writer writer) throws IOException {
-        page("info", request, writer, "version", getVersion(),
+        page("Info", writer, "version", getVersion(),
                 "session", getSession(request),
                 "contextPath", request.getContextPath(),
                 "pathInfo", request.getPathInfo(),
@@ -120,20 +104,20 @@ public class HelloWar extends HttpServlet {
                 "hostname", getHostname());
     }
 
-    protected void page(String title, HttpServletRequest request, Writer writer, String ... entries) throws IOException {
+    protected void page(String title, Writer writer, String ... entries) throws IOException {
         Map<String, String> map;
 
         map = new LinkedHashMap<>();
         for (int i = 0; i < entries.length; i += 2) {
             map.put(entries[i], entries[i + 1]);
         }
-        page(title, request, writer, map);
+        page(title, writer, map);
     }
 
-    protected void page(String title, HttpServletRequest request, Writer writer, Map<String, String> map) throws IOException {
-        String home;
-
-        writer.write("<html><body><h2>" + title + "</h2>\n");
+    protected void page(String title, Writer writer, Map<String, String> map) throws IOException {
+        writer.write("<html><header><title>hellowar</title><body>\n");
+        navigation(writer);
+        writer.write("<h2>" + title + "</h2>\n");
         writer.write("<ul>");
         for (Map.Entry<String, String> entry : map.entrySet()) {
             writer.write("<li>");
@@ -143,15 +127,23 @@ public class HelloWar extends HttpServlet {
             writer.write("</li>");
         }
         writer.write("</ul>");
-        home = request.getContextPath();
-        if (home == null) {
-            home = "/";
-        }
-        home = home + "?cmp=";
-        writer.write("<a href='" + home + "'>home</a>");
         writer.write("</body></html>\n");
     }
 
+    private void navigation(Writer writer) throws IOException {
+        writer.write("<a href='?cmd= '>Home</a> ");
+        writer.write("<a href='?cmd=info'>Info</a> ");
+        writer.write("<a href='?cmd=properties'>Properties</a> ");
+        writer.write("<a href='?cmd=environment'>Environment</a> ");
+        writer.write("<a href='?cmd=create_session'>Create Session</a> ");
+        writer.write("<a href='?cmd=invalidate_session'>Invalidate Session</a> ");
+        writer.write("<a href='?cmd=statuscode&code=401'>Status Code</a> ");
+        writer.write("<a href='?cmd=runtimeexception'>RuntimeException</a> ");
+        writer.write("<a href='?cmd=servletexception'>ServletException</a> ");
+        writer.write("<a href='?cmd=servletexception'>ServletException</a> ");
+        writer.write("\n<hr/>\n");
+
+    }
     protected Map<String, String> sort(Map<String, String> map) throws IOException {
         List<String> keys;
         Map<String, String> result;
