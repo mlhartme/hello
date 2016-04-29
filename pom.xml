@@ -10,7 +10,7 @@
   </parent>
 
   <name>Hello World Servlet</name>
-  <description>Servlet to print hello world</description>
+  <description>Servlet to print hello world. And diagnostic information</description>
   <groupId>net.oneandone</groupId>
   <artifactId>hellowar</artifactId>
   <version>1.0.3-SNAPSHOT</version>

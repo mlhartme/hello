@@ -21,8 +21,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.Writer;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
@@ -40,10 +43,10 @@ public class HelloWar extends HttpServlet {
                 info(request, writer);
                 break;
             case "properties":
-                list(writer, System.getProperties());
+                list("properties", writer, sort((Map) System.getProperties()));
                 break;
             case "environment":
-                list(writer, System.getenv());
+                list("environment", writer, sort(System.getenv()));
                 break;
             case "statuscode":
                 response.sendError(Integer.parseInt(parameter(request, "code")));
@@ -76,7 +79,7 @@ public class HelloWar extends HttpServlet {
     }
 
     protected void index(Writer writer) throws IOException {
-        writer.write("<html><body><h2>Hello, World</h2>\n");
+        writer.write("<html><body><h2>Hello, World!</h2>\n");
         writer.write("<ul>");
         writer.write("<li><a href='?cmd=info'>Info</a></li>");
         writer.write("<li><a href='?cmd=properties'>Properties</a></li>");
@@ -90,28 +93,66 @@ public class HelloWar extends HttpServlet {
     }
 
     private void info(HttpServletRequest request, Writer writer) throws IOException {
-        writer.write("<h2>version: " + getVersion() + "</h2>");
-        writer.write("<h2>contextPath: " + request.getContextPath() + "<h2>");
-        writer.write("<h2>pathInfo: " + request.getPathInfo() + "</h2>");
-        writer.write("<h2>requestUri: " + request.getRequestURI() + "</h2>");
-        writer.write("<h2>docroot: " + request.getRealPath("/") + "</h2>");
-
+        list("info", writer, "version", getVersion(),
+                "contextPath", request.getContextPath(),
+                "pathInfo", request.getPathInfo(),
+                "requestUri", request.getRequestURI(),
+                "docroot", request.getRealPath("/"),
+                "ip", getIp(),
+                "hostname", getHostname());
     }
 
-    protected void list(Writer writer, Map map) throws IOException {
-        List<String> keys;
+    protected void list(String title, Writer writer, String ... entries) throws IOException {
+        Map<String, String> map;
 
-        keys = new ArrayList(map.keySet());
-        Collections.sort(keys);
+        map = new LinkedHashMap<>();
+        for (int i = 0; i < entries.length; i += 2) {
+            map.put(entries[i], entries[i + 1]);
+        }
+        list(title, writer, map);
+    }
+
+    protected void list(String title, Writer writer, Map<String, String> map) throws IOException {
+        writer.write("<html><body><h2>" + title + "</h2>\n");
         writer.write("<ul>");
-        for (String key : keys) {
+        for (Map.Entry<String, String> entry : map.entrySet()) {
             writer.write("<li>");
-            writer.write(key);
+            writer.write(entry.getKey());
             writer.write("=");
-            writer.write(map.get(key).toString());
+            writer.write(entry.getValue());
             writer.write("</li>");
         }
         writer.write("</ul>");
+        writer.write("</body></html>\n");
+    }
+
+    protected Map<String, String> sort(Map<String, String> map) throws IOException {
+        List<String> keys;
+        Map<String, String> result;
+
+        keys = new ArrayList(map.keySet());
+        Collections.sort(keys);
+        result = new LinkedHashMap<>();
+        for (String key : keys) {
+            result.put(key, map.get(key));
+        }
+        return result;
+    }
+
+    private String getIp() {
+        try {
+            return InetAddress.getLocalHost().getHostAddress();
+        } catch (UnknownHostException e) {
+            return "(error: " + e.getMessage() + ")";
+        }
+    }
+
+    private String getHostname() {
+        try {
+            return InetAddress.getLocalHost().getHostName();
+        } catch (UnknownHostException e) {
+            return "(error: " + e.getMessage() + ")";
+        }
     }
 
     private String getVersion() throws IOException {
