@@ -19,6 +19,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.Writer;
 import java.net.InetAddress;
@@ -34,19 +35,33 @@ public class HelloWar extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         Writer writer;
         String[] cmds;
+        HttpSession session;
 
         response.setContentType("text/html");
+        response.setHeader("Cache-Control", "no-cache");
+        response.setHeader("Pragma", "no-cache");
+        response.setHeader("Expires", "0");
         writer = response.getWriter();
         cmds = request.getParameterValues("cmd");
         switch (cmds != null && cmds.length == 1 ? cmds[0] : "") {
             case "info":
                 info(request, writer);
                 break;
+            case "create_session":
+                page("Create Session", request, writer, "result", request.getSession(true).getId());
+                break;
+            case "invalidate_session":
+                session = request.getSession(false);
+                if (session != null) {
+                    session.invalidate();
+                }
+                page("Invalidate Session", request, writer, "result", session == null ? "no session - nothing to do" : "done");
+                break;
             case "properties":
-                list("properties", writer, sort((Map) System.getProperties()));
+                page("properties", request, writer, sort((Map) System.getProperties()));
                 break;
             case "environment":
-                list("environment", writer, sort(System.getenv()));
+                page("environment", request, writer, sort(System.getenv()));
                 break;
             case "statuscode":
                 response.sendError(Integer.parseInt(parameter(request, "code")));
@@ -84,16 +99,19 @@ public class HelloWar extends HttpServlet {
         writer.write("<li><a href='?cmd=info'>Info</a></li>");
         writer.write("<li><a href='?cmd=properties'>Properties</a></li>");
         writer.write("<li><a href='?cmd=environment'>Environment</a></li>");
+        writer.write("<li><a href='?cmd=create_session'>Create Session</a></li>");
+        writer.write("<li><a href='?cmd=invalidate_session'>Invalidate Session</a></li>");
         writer.write("<li><a href='?cmd=statuscode&code=401'>Status Code</a></li>");
-        writer.write("<li><a href='?cmd=runtimeexception'>RuntimeException</a></li>");
-        writer.write("<li><a href='?cmd=servletexception'>ServletException</a></li>");
-        writer.write("<li><a href='?cmd=servletexception'>ServletException</a></li>");
+        writer.write("<li><a href='?cmd=runtimeexception'>throw RuntimeException</a></li>");
+        writer.write("<li><a href='?cmd=servletexception'>throw ServletException</a></li>");
+        writer.write("<li><a href='?cmd=servletexception'>throw ServletException</a></li>");
         writer.write("</ul>");
         writer.write("</body></html>\n");
     }
 
     private void info(HttpServletRequest request, Writer writer) throws IOException {
-        list("info", writer, "version", getVersion(),
+        page("info", request, writer, "version", getVersion(),
+                "session", getSession(request),
                 "contextPath", request.getContextPath(),
                 "pathInfo", request.getPathInfo(),
                 "requestUri", request.getRequestURI(),
@@ -102,17 +120,19 @@ public class HelloWar extends HttpServlet {
                 "hostname", getHostname());
     }
 
-    protected void list(String title, Writer writer, String ... entries) throws IOException {
+    protected void page(String title, HttpServletRequest request, Writer writer, String ... entries) throws IOException {
         Map<String, String> map;
 
         map = new LinkedHashMap<>();
         for (int i = 0; i < entries.length; i += 2) {
             map.put(entries[i], entries[i + 1]);
         }
-        list(title, writer, map);
+        page(title, request, writer, map);
     }
 
-    protected void list(String title, Writer writer, Map<String, String> map) throws IOException {
+    protected void page(String title, HttpServletRequest request, Writer writer, Map<String, String> map) throws IOException {
+        String home;
+
         writer.write("<html><body><h2>" + title + "</h2>\n");
         writer.write("<ul>");
         for (Map.Entry<String, String> entry : map.entrySet()) {
@@ -123,6 +143,12 @@ public class HelloWar extends HttpServlet {
             writer.write("</li>");
         }
         writer.write("</ul>");
+        home = request.getContextPath();
+        if (home == null) {
+            home = "/";
+        }
+        home = home + "?cmp=";
+        writer.write("<a href='" + home + "'>home</a>");
         writer.write("</body></html>\n");
     }
 
@@ -161,5 +187,12 @@ public class HelloWar extends HttpServlet {
         p = new Properties();
         p.load(getClass().getClassLoader().getResourceAsStream("/META-INF/pominfo.properties"));
         return p.getProperty("version");
+    }
+
+    private String getSession(HttpServletRequest request) {
+        HttpSession session;
+
+        session = request.getSession(false);
+        return session == null ? "" : session.getId();
     }
 }
