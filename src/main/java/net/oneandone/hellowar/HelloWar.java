@@ -32,6 +32,8 @@ import java.util.Map;
 import java.util.Properties;
 
 public class HelloWar extends HttpServlet {
+    private static final String TITLE = "Hello, World!";
+
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         Writer writer;
         String[] cmds;
@@ -73,7 +75,7 @@ public class HelloWar extends HttpServlet {
             case "ioexception":
                 throw new IOException("demo IO exception");
             default:
-                page("Home", writer);
+                page(TITLE, writer);
                 break;
         }
         writer.close();
@@ -94,7 +96,7 @@ public class HelloWar extends HttpServlet {
     }
 
     private void info(HttpServletRequest request, Writer writer) throws IOException {
-        page("Info", writer, "version", getVersion(),
+        page("Info", writer, "hellowar", getVersion(),
                 "session", getSession(request),
                 "contextPath", request.getContextPath(),
                 "pathInfo", request.getPathInfo(),
@@ -115,7 +117,7 @@ public class HelloWar extends HttpServlet {
     }
 
     protected void page(String title, Writer writer, Map<String, String> map) throws IOException {
-        writer.write("<html><header><title>hellowar</title><body>\n");
+        writer.write("<html><header><title>" + TITLE + "</title><body>\n");
         navigation(writer);
         writer.write("<h2>" + title + "</h2>\n");
         writer.write("<ul>");
