@@ -1,6 +1,6 @@
 target/
 .idea
-.stool
+.backstage
 *.iml
 pom.xml.tag
 pom.xml.releaseBackup
