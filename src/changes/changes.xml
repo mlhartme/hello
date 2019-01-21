@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?><document xmlns="http://maven.apache.org/changes/1.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/changes/1.0.0 http://maven.apache.org/xsd/changes-1.0.0.xsd">
   <body>
     <release date="2015-04-02" version="1.0.4">
+      <action date="2019-01-21" dev="mhm" type="add">
+        Info page: properly handler null pathInfo.
+      </action>
       <action date="2016-04-29" dev="mhm" type="add">
         Add session handling.
       </action>

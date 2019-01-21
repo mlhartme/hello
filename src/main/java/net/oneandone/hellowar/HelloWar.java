@@ -125,11 +125,15 @@ public class HelloWar extends HttpServlet {
             writer.write("<li>");
             writer.write(entry.getKey());
             writer.write("=");
-            writer.write(entry.getValue());
+            writer.write(or(entry.getValue(), "(null)"));
             writer.write("</li>");
         }
         writer.write("</ul>");
         writer.write("</body></html>\n");
+    }
+
+    private static String or(String str, String dflt) {
+        return str != null ? str : dflt;
     }
 
     private void navigation(Writer writer) throws IOException {
