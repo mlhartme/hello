@@ -1,6 +1,6 @@
 # Changelog
 
-## 1.0.4 (pending)
+## 1.0.4 (2019-01-25)
 
 * Info page: properly handler null pathInfo.
 * update parent pom to fix Maven build
