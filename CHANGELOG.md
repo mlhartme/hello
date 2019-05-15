@@ -2,7 +2,7 @@
 
 ## 1.0.4 (2019-01-25)
 
-* Info page: properly handler null pathInfo.
+* Info page: properly handle null pathInfo.
 * update parent pom to fix Maven build
 
 
