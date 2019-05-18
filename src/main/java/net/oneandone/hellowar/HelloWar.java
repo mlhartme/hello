@@ -96,14 +96,26 @@ public class HelloWar extends HttpServlet {
     }
 
     private void info(HttpServletRequest request, Writer writer) throws IOException {
+        String msg;
+        InetAddress a;
+
+        try {
+            a = InetAddress.getLocalHost();
+            msg = "ok";
+        } catch (UnknownHostException e) {
+            a = InetAddress.getLocalHost();
+            msg = "error: " + e.getMessage();
+        }
         page("Info", writer, "hellowar", getVersion(),
                 "session", getSession(request),
                 "contextPath", request.getContextPath(),
                 "pathInfo", request.getPathInfo(),
                 "requestUri", request.getRequestURI(),
                 "docroot", request.getRealPath("/"),
-                "ip", getIp(),
-                "hostname", getHostname());
+                "getLocalHost", msg,
+                "cannonicalHostName", a.getCanonicalHostName(),
+                "hostName", a.getHostName(),
+                "hostAddress", a.getHostAddress());
     }
 
     protected void page(String title, Writer writer, String ... entries) throws IOException {
@@ -161,22 +173,6 @@ public class HelloWar extends HttpServlet {
             result.put(key, map.get(key));
         }
         return result;
-    }
-
-    private String getIp() {
-        try {
-            return InetAddress.getLocalHost().getHostAddress();
-        } catch (UnknownHostException e) {
-            return "(error: " + e.getMessage() + ")";
-        }
-    }
-
-    private String getHostname() {
-        try {
-            return InetAddress.getLocalHost().getHostName();
-        } catch (UnknownHostException e) {
-            return "(error: " + e.getMessage() + ")";
-        }
     }
 
     private String getVersion() throws IOException {

@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.0.5 (pending)
+
+* Info with canonical hostname
+* Can be started with `mvn cargo:run` now
+
+
 ## 1.0.4 (2019-01-25)
 
 * Info page: properly handle null pathInfo.
