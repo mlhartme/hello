@@ -2,6 +2,7 @@
 
 ## 1.0.5 (pending)
 
+* Update lazy-foss-parent 1.1.0 to 1.2.1
 * Info with canonical hostname
 * Can be started with `mvn cargo:run` now
 
