@@ -1,10 +1,11 @@
 # Changelog
 
-## 1.0.5 (pending)
+## 1.0.5 (2019-06-24)
 
-* Update lazy-foss-parent 1.1.0 to 1.2.1
+* Update lazy-foss-parent 1.1.0 to 1.3.0
 * Info with canonical hostname
 * Can be started with `mvn cargo:run` now
+* checkstyle fixes
 
 
 ## 1.0.4 (2019-01-25)
