@@ -118,7 +118,7 @@ public class HelloWar extends HttpServlet {
                 "hostAddress", a.getHostAddress());
     }
 
-    protected void page(String title, Writer writer, String ... entries) throws IOException {
+    protected void page(String title, Writer writer, String... entries) throws IOException {
         Map<String, String> map;
 
         map = new LinkedHashMap<>();
