@@ -1,9 +1,9 @@
-pipeline {
-    agent { docker { image 'maven:3.3.3' } }
-    stages {
-        stage('build') {
-            steps {
-                sh 'mvn --version'
+pipeline { 
+    agent { docker 'maven:3.6.1-jdk-12' }
+    stages { 
+        stage('Build') { 
+            steps { 
+               sh 'mvn -B clean verify'
             }
         }
     }
