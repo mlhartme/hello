@@ -1,2 +1,2 @@
-maven()
+maven(java: 8)
 
