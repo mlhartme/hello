@@ -1,1 +1,1 @@
-maven(stagehost : "cpgem1")
+maven(stagehost : "pearl2")
