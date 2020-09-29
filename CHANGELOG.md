@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.0.6 (pending)
+
+* parent pom update
+* typo fix: canonical
+
+
 ## 1.0.5 (2019-06-24)
 
 * Update lazy-foss-parent 1.1.0 to 1.3.0
