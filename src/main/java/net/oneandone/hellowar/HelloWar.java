@@ -113,7 +113,7 @@ public class HelloWar extends HttpServlet {
                 "requestUri", request.getRequestURI(),
                 "docroot", request.getRealPath("/"),
                 "getLocalHost", msg,
-                "cannonicalHostName", a.getCanonicalHostName(),
+                "canonicalHostName", a.getCanonicalHostName(),
                 "hostName", a.getHostName(),
                 "hostAddress", a.getHostAddress());
     }
