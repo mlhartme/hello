@@ -162,7 +162,7 @@ public class HelloWar extends HttpServlet {
         writer.write("\n<hr/>\n");
 
     }
-    protected Map<String, String> sort(Map<String, String> map) throws IOException {
+    protected Map<String, String> sort(Map<String, String> map) {
         List<String> keys;
         Map<String, String> result;
 

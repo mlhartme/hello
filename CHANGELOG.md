@@ -2,7 +2,7 @@
 
 ## 1.0.6 (pending)
 
-* parent pom update
+* parent pom update, build with Java 12
 * typo fix: canonical
 
 
