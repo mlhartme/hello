@@ -16,6 +16,10 @@
   <version>1.0.6-SNAPSHOT</version>
   <packaging>war</packaging>
 
+  <properties>
+    <foo.bar>xyz</foo.bar>
+  </properties>
+
   <scm>
     <connection>scm:git:ssh://git@github.com/mlhartme/hellowar.git</connection>
     <developerConnection>scm:git:ssh://git@github.com/mlhartme/hellowar.git</developerConnection>
@@ -43,6 +47,7 @@
   </dependencies>
 
   <build>
+    <!-- finalName>${foo.bar}-${parsedVersion.majorVersion}</finalName -->
     <plugins>
       <plugin><!-- TODO print appliction version -->
         <groupId>org.apache.maven.plugins</groupId>
@@ -65,6 +70,19 @@
             </configuration>
             <goals>
               <goal>run</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>build-helper-maven-plugin</artifactId>
+        <version>3.2.0</version>
+        <executions>
+          <execution>
+            <id>parse-version</id>
+            <goals>
+              <goal>parse-version</goal>
             </goals>
           </execution>
         </executions>
@@ -104,6 +122,36 @@
           </deployables>
         </configuration>
       </plugin>
+
+      <plugin>
+        <groupId>net.oneandone.maven.plugins</groupId>
+        <artifactId>dockerbuild</artifactId>
+        <version>1.0.0</version>
+        <executions>
+          <execution>
+            <id>dockerbuild-package</id>
+            <goals>
+              <goal>build</goal>
+            </goals>
+          </execution>
+          <execution>
+            <id>dockerbuild-deploy</id>
+            <goals>
+              <goal>push</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <library>com.ionos.maven.plugins.dockerbuild.library</library>
+          <dockerbuild>tomcat-stool-war</dockerbuild>
+          <image>contargo.server.lan/cisoops-public/%a:%V</image>
+          <arguments>
+            <java>15</java>
+            <opts>-Dfoo=${maven.version} -Dmajor=${parsedVersion.majorVersion}</opts>
+          </arguments>
+        </configuration>
+      </plugin>
+
     </plugins>
   </build>
 </project>
