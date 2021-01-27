@@ -1,0 +1,7 @@
+name: "hellowar"
+extends: "kutter"
+values:
+  image: "${dockerbuild.image}"
+  memory: 2048
+  fault: "com.ionos:cp"
+
