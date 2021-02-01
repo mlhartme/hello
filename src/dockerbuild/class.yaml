@@ -2,5 +2,9 @@ name: "hellowar"
 extends: "kutter"
 values:
   image: "${dockerbuild.image}"
-  buildScm: "${project.scm.url}"
-  buildOrigin: "${dockerbuild.origin}"
+  buildScm:
+    extra: true
+    value: "${project.scm.url}"
+  buildOrigin: 
+    extra: true
+    value: "${dockerbuild.origin}"
