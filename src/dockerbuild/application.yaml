@@ -1,6 +1,6 @@
 name: "hellowar"
 extends: "kutter"
-fields:
+properties:
   image: "${dockerbuild.image}"
   buildScm:
     extra: true
