@@ -1,4 +1,4 @@
-name: "hellowar"
+name: "${project.artifactId}"
 extends: "kutter"
 properties:
   image: "${dockerbuild.image}"
