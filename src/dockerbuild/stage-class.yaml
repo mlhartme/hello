@@ -1,10 +1,10 @@
-name: "${project.artifactId}"
-extends: "kutter"
-properties:
-  image: "${dockerbuild.image}"
-  buildScm:
-    extra: true
-    value: "${project.scm.url}"
-  buildOrigin: 
-    extra: true
-    value: "${dockerbuild.origin}"
+DIRECTIONS: "${project.artifactId}"
+EXTENDS: "kutter"
+
+image: "${dockerbuild.image}"
+buildScm:
+  extra: true
+  value: "${project.scm.url}"
+buildOrigin: 
+  extra: true
+  value: "${dockerbuild.origin}"
