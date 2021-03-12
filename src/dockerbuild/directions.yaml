@@ -4,7 +4,7 @@ EXTENDS: "kutter"
 image: "${dockerbuild.image}"
 buildScm:
   extra: true
-  value: "${project.scm.url}"
+  value: "=${project.scm.url}"
 buildOrigin: 
   extra: true
-  value: "${dockerbuild.origin}"
+  value: "=${dockerbuild.origin}"
