@@ -139,7 +139,7 @@
         </executions>
         <configuration>
           <library>com.ionos.maven.plugins.dockerbuild.library</library>
-          <dockerbuild>tomcat-war</dockerbuild>
+          <dockerbuild>kutter-tomcat-war</dockerbuild>
           <image>contargo.server.lan/cisoops-public/%a-%b:%V</image>
         </configuration>
       </plugin>
