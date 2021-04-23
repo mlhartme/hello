@@ -13,7 +13,7 @@
   <description>Servlet to print hello world. And diagnostic information</description>
   <groupId>net.oneandone</groupId>
   <artifactId>hellowar</artifactId>
-  <version>1.0.6-SNAPSHOT</version>
+  <version>1.0.7-SNAPSHOT</version>
   <packaging>war</packaging>
 
   <scm>
@@ -122,7 +122,7 @@
       <plugin>
         <groupId>net.oneandone.maven.plugins</groupId>
         <artifactId>dockerbuild</artifactId>
-        <version>1.1.1</version>
+        <version>1.1.2-SNAPSHOT</version>
         <executions>
           <execution>
             <id>dockerbuild-package</id>
@@ -139,7 +139,7 @@
         </executions>
         <configuration>
           <library>com.ionos.maven.plugins.dockerbuild.library</library>
-          <dockerbuild>kutter-tomcat-war</dockerbuild>
+          <dockerbuild>tomcat-war</dockerbuild>
           <image>contargo.server.lan/cisoops-public/%a-%b:%V</image>
         </configuration>
       </plugin>
