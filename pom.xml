@@ -48,12 +48,12 @@
       <plugin><!-- TODO print appliction version -->
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-antrun-plugin</artifactId>
-        <version>1.3</version>
+        <version>3.0.0</version>
         <executions>
           <execution>
             <phase>generate-resources</phase>
             <configuration>
-              <tasks>
+              <target>
                 <mkdir dir="${basedir}/target/classes/META-INF" />
                 <echo file="${basedir}/target/classes/META-INF/pominfo.properties">
                   groupId = ${project.groupId}
@@ -62,7 +62,7 @@
                   name = ${project.name}
                   url = ${project.url}
                 </echo>
-              </tasks>
+              </target>
             </configuration>
             <goals>
               <goal>run</goal>
