@@ -142,10 +142,9 @@
           <dockerbuild>kutter-tomcat-war</dockerbuild>
           <image>contargo.server.lan/cisoops-public/%a-%b:%V</image>
           <arguments>
-            <java>14</java>
             <war>%copy:%artifact:war</war>
             <directions><![CDATA[
-%base64:DIRECTIONS: "${project.artifactId}"
+%base64:%filter:DIRECTIONS: "${project.artifactId}"
 EXTENDS: "kutter"
 image: "${dockerbuild.image}"
 buildOrigin: "${dockerbuild.origin}"
