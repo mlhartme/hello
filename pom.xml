@@ -147,8 +147,8 @@
 %base64:%filter:DIRECTIONS: "${project.artifactId}"
 EXTENDS: "kutter"
 image: "${dockerbuild.image}"
-buildOrigin: "${dockerbuild.origin}"
-buildScm: "${project.scm.url}"
+metadataOrigin: "${dockerbuild.origin}"
+metadataScm: "${project.scm.url}"
 ]]></directions>
           </arguments>
         </configuration>
