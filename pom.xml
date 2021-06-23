@@ -122,7 +122,7 @@
       <plugin>
         <groupId>net.oneandone.maven.plugins</groupId>
         <artifactId>dockerbuild</artifactId>
-        <version>1.2.1</version>
+        <version>1.2.2</version>
         <executions>
           <execution>
             <id>dockerbuild-package</id>
@@ -140,7 +140,7 @@
         <configuration>
           <library>com.ionos.maven.plugins.dockerbuild.library</library>
           <dockerbuild>kutter-tomcat-war</dockerbuild>
-          <image>contargo.server.lan/cisoops-public/%a-%b:%V</image>
+          <image>contargo.server.lan/cisoops-public/%a%-b:%V</image>
           <arguments>
             <war>%copy:%artifact:war</war>
             <directions><![CDATA[

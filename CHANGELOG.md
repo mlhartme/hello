@@ -1,10 +1,5 @@
 # Changelog
 
-## 1.0.7 (pending)
-
-* dockerbuild plugin
-
-
 ## 1.0.6 (?)
 
 * parent pom update, build with Java 12
