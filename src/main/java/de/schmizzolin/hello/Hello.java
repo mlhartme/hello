@@ -16,11 +16,11 @@
 package de.schmizzolin.hello;
 
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.Writer;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
@@ -29,12 +29,23 @@ import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Properties;
 
-public class Hello extends HttpServlet {
-    private static final String TITLE = "Hello, World!";
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+@SpringBootApplication
+@Controller
+public class Hello {
+    private static final String TITLE = "Hello, World";
+
+    public static void main(String[] args) {
+        SpringApplication.run(Hello.class, args);
+    }
+
+    @GetMapping("/*")
+    public void get(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         Writer writer;
         String[] cmds;
         HttpSession session;
@@ -176,11 +187,18 @@ public class Hello extends HttpServlet {
     }
 
     private String getVersion() throws IOException {
-        Properties p;
+        StringBuilder result;
 
-        p = new Properties();
-        p.load(getClass().getClassLoader().getResourceAsStream("/META-INF/pominfo.properties"));
-        return p.getProperty("version");
+        result = new StringBuilder();
+        try (InputStream src = getClass().getClassLoader().getResourceAsStream("/hello.version")) {
+            while (true) {
+                int b = src.read();
+                if (b == -1) {
+                    return result.toString().trim();
+                }
+                result.append((char) b); // ok for ascii
+            }
+        }
     }
 
     private String getSession(HttpServletRequest request) {
