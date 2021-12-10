@@ -190,7 +190,7 @@ public class Hello {
         StringBuilder result;
 
         result = new StringBuilder();
-        try (InputStream src = getClass().getClassLoader().getResourceAsStream("/hello.version")) {
+        try (InputStream src = getClass().getClassLoader().getResourceAsStream("hello.version")) {
             while (true) {
                 int b = src.read();
                 if (b == -1) {
