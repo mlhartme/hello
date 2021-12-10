@@ -1,9 +1,9 @@
 # Changelog
 
-## 1.0.6 (?)
+## 1.1.0 (pending)
 
+* removed proprietary dockerbuild plugin
 * parent pom update, build with Java 12
-* typo fix: canonical
 
 
 ## 1.0.5 (2019-06-24)
