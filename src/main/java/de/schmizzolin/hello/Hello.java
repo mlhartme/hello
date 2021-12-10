@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package net.oneandone.hellowar;
+package de.schmizzolin.hello;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -31,7 +31,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
-public class HelloWar extends HttpServlet {
+public class Hello extends HttpServlet {
     private static final String TITLE = "Hello, World!";
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
@@ -106,7 +106,7 @@ public class HelloWar extends HttpServlet {
             a = InetAddress.getLocalHost();
             msg = "error: " + e.getMessage();
         }
-        page("Info", writer, "hellowar", getVersion(),
+        page("Info", writer, "hello", getVersion(),
                 "session", getSession(request),
                 "contextPath", request.getContextPath(),
                 "pathInfo", request.getPathInfo(),

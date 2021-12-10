@@ -5,12 +5,12 @@
          version="2.5">
 
   <servlet>
-    <servlet-name>hellowar</servlet-name>
-    <servlet-class>net.oneandone.hellowar.HelloWar</servlet-class>
+    <servlet-name>hello</servlet-name>
+    <servlet-class>de.schmizzolin.hello.Hello</servlet-class>
     <load-on-startup>1</load-on-startup>
   </servlet>
   <servlet-mapping>
-    <servlet-name>hellowar</servlet-name>
+    <servlet-name>hello</servlet-name>
     <url-pattern>/*</url-pattern>
   </servlet-mapping>
 </web-app>
