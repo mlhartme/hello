@@ -1,0 +1,1 @@
+minikube start --apiserver-names=mops.schmizzolin.de --embed-certs=true --listen-address=0.0.0.0 --ports 8443:8443,2376:2376,80:80,443:443 --addons=ingress
