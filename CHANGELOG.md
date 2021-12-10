@@ -2,6 +2,7 @@
 
 ## 1.1.0 (pending)
 
+* removed cargo
 * removed proprietary dockerbuild plugin
 * parent pom update, build with Java 12
 
