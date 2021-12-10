@@ -1,0 +1,3 @@
+repositoryTag: "hello:${image.version}"
+tls: false
+host: "hello.schmizzolin.de"
