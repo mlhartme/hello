@@ -17,9 +17,9 @@
   <packaging>war</packaging>
 
   <scm>
-    <connection>scm:git:ssh://git@github.com/mlhartme/hellowar.git</connection>
-    <developerConnection>scm:git:ssh://git@github.com/mlhartme/hellowar.git</developerConnection>
-    <url>https://github.com/mlhartme/hellowar</url>
+    <connection>scm:git:ssh://git@github.com/mlhartme/hello.git</connection>
+    <developerConnection>scm:git:ssh://git@github.com/mlhartme/hello.git</developerConnection>
+    <url>https://github.com/mlhartme/hello</url>
     <tag>HEAD</tag>
   </scm>
 

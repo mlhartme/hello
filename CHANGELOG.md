@@ -3,6 +3,7 @@
 ## 2.0.0 (pending)
 
 * changed coordinates from net.oneandone:hellowar:1.0.x to de.schmizzolin:hello:2.0.0
+* moved sources from https://github.com/mlhartme/hellowar to https://github.com/mlhartme/hello
 * removed cargo
 * removed proprietary dockerbuild plugin
 * update parent pom 1.3.0 to 1.5.1, build for Java 16
