@@ -1,10 +1,11 @@
 # Changelog
 
-## 1.1.0 (pending)
+## 2.0.0 (pending)
 
+* changed coordinates from net.oneandone:hellowar:1.0.x to de.schmizzolin:hello:2.0.0
 * removed cargo
 * removed proprietary dockerbuild plugin
-* parent pom update, build with Java 12
+* update parent pom 1.3.0 to 1.5.1, build for Java 16
 
 
 ## 1.0.5 (2019-06-24)
