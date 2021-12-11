@@ -122,7 +122,7 @@ public class Hello {
                 "contextPath", request.getContextPath(),
                 "pathInfo", request.getPathInfo(),
                 "requestUri", request.getRequestURI(),
-                "docroot", request.getRealPath("/"),
+                "docroot", request.getServletContext().getRealPath("/"),
                 "getLocalHost", msg,
                 "canonicalHostName", a.getCanonicalHostName(),
                 "hostName", a.getHostName(),

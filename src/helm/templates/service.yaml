@@ -9,5 +9,4 @@ spec:
     protocol: TCP
     targetPort: 8080
   selector:
-    app: yogi
-
+    app: hello

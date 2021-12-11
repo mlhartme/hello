@@ -133,7 +133,7 @@
             <configuration>
               <images>
                 <image>
-                  <name>yogi:${image.version}</name>
+                  <name>hello:${image.version}</name>
                   <build>
                     <dockerFile>${basedir}/src/docker/Dockerfile</dockerFile>
                     <assembly>
