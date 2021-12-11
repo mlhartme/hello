@@ -177,7 +177,7 @@ public class Hello {
         List<String> keys;
         Map<String, String> result;
 
-        keys = new ArrayList(map.keySet());
+        keys = new ArrayList<>(map.keySet());
         Collections.sort(keys);
         result = new LinkedHashMap<>();
         for (String key : keys) {

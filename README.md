@@ -1,6 +1,6 @@
 # Hello
 
-Simple hello world web application, implemented with springboot.
+Simple "Hello, world" web application, implemented with springboot.
 
 Build: mvn clean install
 Run: mvn spring-boot:run
