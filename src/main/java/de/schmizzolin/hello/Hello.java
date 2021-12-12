@@ -26,9 +26,11 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -71,7 +73,7 @@ public class Hello {
                 page("Invalidate Session", writer, "result", session == null ? "no session - nothing to do" : "done");
                 break;
             case "properties":
-                page("Properties", writer, sort((Map) System.getProperties()));
+                page("Properties", writer, sort(toMap(System.getProperties())));
                 break;
             case "environment":
                 page("Environment", writer, sort(System.getenv()));
@@ -92,6 +94,13 @@ public class Hello {
         writer.close();
     }
 
+    private static Map<String, String> toMap(Properties properties) {
+        Map<String, String> result = new HashMap<>();
+        for (var key : properties.stringPropertyNames()) {
+            result.put(key, properties.getProperty(key));
+        }
+        return result;
+    }
     private String parameter(HttpServletRequest request, String name) {
         String[] values;
 
