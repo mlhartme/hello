@@ -7,6 +7,5 @@ Run: mvn spring-boot:run
 
 
 TODO:
-* replaced servlet features with spring features
-* fix warnings
+* replace servlet features with spring features
 * test sessions

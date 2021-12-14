@@ -102,7 +102,7 @@
   </build>
   <profiles>
     <profile>
-      <id>helm</id>
+      <id>kubernetes</id>
       <build>
         <plugins>
           <plugin>
@@ -115,10 +115,10 @@
                   <goal>copy-resources</goal>
                 </goals>
                 <configuration>
-                  <outputDirectory>${basedir}/target/helm</outputDirectory>
+                  <outputDirectory>${basedir}/target/chart</outputDirectory>
                   <resources>
                     <resource>
-                      <directory>src/helm</directory>
+                      <directory>src/chart</directory>
                       <filtering>true</filtering>
                     </resource>
                   </resources>
