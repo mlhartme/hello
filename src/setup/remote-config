@@ -38,4 +38,4 @@ chmod 600 $dest
 
 echo "done"
 echo " to point docker to $host: source $envfile"
-echo " to point kubernetes to $host: cp $dest"
+echo " to point kubernetes to $host: cp $dest $HOME/.kube/config"
