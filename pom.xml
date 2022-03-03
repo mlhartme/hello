@@ -133,7 +133,7 @@
             <configuration>
               <images>
                 <image>
-                  <name>hello:${image.version}</name>
+                  <name>registry.schmizzolin.de/hello:${image.version}</name>
                   <build>
                     <dockerFile>${basedir}/src/docker/Dockerfile</dockerFile>
                     <assembly>

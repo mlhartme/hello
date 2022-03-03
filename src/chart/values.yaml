@@ -1,4 +1,4 @@
-repositoryTag: "hello:${image.version}"
+repositoryTag: "registry.schmizzolin.de/hello:${image.version}"
 tls: false
 host: "hello.schmizzolin.de"
 replicas: 1
