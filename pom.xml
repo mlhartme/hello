@@ -23,7 +23,7 @@
   </scm>
 
   <properties>
-    <springboot.version>2.6.1</springboot.version>
+    <springboot.version>2.6.6</springboot.version>
     <maven.build.timestamp.format>yyyyMMdd-HHmmss</maven.build.timestamp.format>
   </properties>
 
