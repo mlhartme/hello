@@ -2,10 +2,10 @@
 
 ## 2.0.0 (pending)
 
-* changed from plain servlet to springboot application
+* changed coordinates from de.schmizzolin:hellowar:1.0.x to de.schmizzolin:hello:2.0.0
+* changed from plain servlet to springboot 2.7 application
 * dumped cargo, run with spring-boot:run now
 * dumped proprietary dockerbuild plugin, use fabric8 maven plugin instead
-* changed coordinates from de.schmizzolin:hellowar:1.0.x to de.schmizzolin:hello:2.0.0
 * moved sources from https://github.com/mlhartme/hellowar to https://github.com/mlhartme/hello
 * renamed net.oneandone.hellowar.HelloWar to de.schmizzolin.hello.Hello
 * update parent pom 1.3.0 to 1.5.2, build for Java 17
