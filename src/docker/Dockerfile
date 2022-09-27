@@ -1,4 +1,4 @@
-FROM debian:sid-20211201-slim
+FROM debian:sid-20220912-slim
 ENV LANG de_DE.UTF-8
 ENV OPTS ""
 RUN mkdir -p /usr/share/man/man1 && \
