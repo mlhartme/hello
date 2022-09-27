@@ -12,6 +12,12 @@ To build and run an image:
 mvn clean package -Pkubernetes
 ./docker-run.sh
 
+# Kubernetes
+
+mvn clean package -Pkubernetes
+docker push <latest-snapshot>
+helm upgrade hello target/chart
+
 
 TODO:
 * replace servlet features with spring features
