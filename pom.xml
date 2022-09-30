@@ -160,6 +160,44 @@
               </execution>
             </executions>
           </plugin>
+          <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>exec-maven-plugin</artifactId>
+            <version>3.1.0</version>
+            <executions>
+              <execution>
+                <id>package-chart</id>
+                <phase>package</phase>
+                <goals>
+                  <goal>exec</goal>
+                </goals>
+                <configuration>
+                  <executable>helm</executable>
+                  <workingDirectory>${project.build.directory}</workingDirectory>
+                  <arguments>
+                    <argument>package</argument>
+                    <argument>chart</argument>
+                  </arguments>
+                </configuration>
+              </execution>
+              <execution>
+                <id>push-chart</id>
+                <phase>deploy</phase>
+                <goals>
+                  <goal>exec</goal>
+                </goals>
+                <configuration>
+                  <executable>helm</executable>
+                  <workingDirectory>${project.build.directory}</workingDirectory>
+                  <arguments>
+                    <argument>push</argument>
+                    <argument>hello-${image.version}.tgz</argument>
+                    <argument>oci://ghcr.io/mlhartme/charts</argument>
+                  </arguments>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
         </plugins>
       </build>
     </profile>
