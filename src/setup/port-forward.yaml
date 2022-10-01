@@ -20,10 +20,10 @@ spec:
         image: alpine/socat:latest
         args: 
         - "TCP-LISTEN:80,fork,reuseaddr"
-        - "TCP:localhost:31391"
+        - "TCP:localhost:${HTTP_PORT}"
       - name: https
         image: alpine/socat:latest
         args: 
         - "TCP-LISTEN:443,fork,reuseaddr"
-        - "TCP:localhost:30714"
+        - "TCP:localhost:${HTTPS_PORT}"
 
