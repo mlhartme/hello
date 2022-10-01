@@ -78,7 +78,6 @@
         <artifactId>spring-boot-maven-plugin</artifactId>
         <version>${springboot.version}</version>
         <configuration>
-          <classifier>springboot</classifier>
           <jvmArguments>-Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=5005</jvmArguments>
         </configuration>
         <executions>
@@ -137,7 +136,7 @@
                   <build>
                     <dockerFile>${basedir}/src/docker/Dockerfile</dockerFile>
                     <assembly>
-                      <descriptor>${basedir}/src/docker/assembly.xml</descriptor>
+                      <descriptorRef>artifact</descriptorRef>
                     </assembly>
                   </build>
                 </image>
