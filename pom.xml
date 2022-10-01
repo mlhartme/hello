@@ -135,9 +135,7 @@
                   <name>ghcr.io/mlhartme/hello:${image.version}</name>
                   <build>
                     <dockerFile>${basedir}/src/docker/Dockerfile</dockerFile>
-                    <assembly>
-                      <descriptorRef>artifact</descriptorRef>
-                    </assembly>
+                    <assembly><descriptorRef>artifact</descriptorRef></assembly>
                   </build>
                 </image>
               </images>
