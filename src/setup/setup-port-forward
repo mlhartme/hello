@@ -1,6 +1,0 @@
-#!/bin/sh
-set -e
-export HTTP_PORT=$(kubectl get service/ingress-nginx-controller -n ingress-nginx -o jsonpath='{.spec.ports[?(@.name=="http")].nodePort}')
-export HTTPS_PORT=$(kubectl get service/ingress-nginx-controller -n ingress-nginx -o jsonpath='{.spec.ports[?(@.name=="https")].nodePort}')
-cat port-forward.yaml | envsubst | kubectl apply -f -
-

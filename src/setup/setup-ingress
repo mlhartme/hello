@@ -1,0 +1,15 @@
+#!/bin/sh
+set -e
+
+echo "installing nginx ingress controller on NodePort ..."
+echo "  see https://github.com/kubernetes/ingress-nginx"
+echo "  see https://docs.k0sproject.io/v1.22.1+k0s.1/examples/nginx-ingress/"
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.1.3/deploy/static/provider/baremetal/deploy.yaml
+
+export HTTP_PORT=$(kubectl get service/ingress-nginx-controller -n ingress-nginx -o jsonpath='{.spec.ports[?(@.name=="http")].nodePort}')
+export HTTPS_PORT=$(kubectl get service/ingress-nginx-controller -n ingress-nginx -o jsonpath='{.spec.ports[?(@.name=="https")].nodePort}')
+
+echo "mapping node ports ${HTTP_PORT}/${HTTPS_PORT} to 80/443 ..."
+cat port-forward.yaml | envsubst | kubectl apply -f -
+
+echo "done"
