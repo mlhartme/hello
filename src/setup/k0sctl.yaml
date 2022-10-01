@@ -1,0 +1,23 @@
+apiVersion: k0sctl.k0sproject.io/v1beta1
+kind: Cluster
+metadata:
+  name: mops-cluster
+spec:
+  hosts:
+  - hostname: mops.schmizzolin.de
+    role: single
+    ssh:
+      address: mops.schmizzolin.de
+      user: root
+      port: 22
+      keyPath: /Users/mhm/.ssh/id_rsa
+  k0s:
+    version: 1.25.2+k0s.0
+    config:
+      apiVersion: k0s.k0sproject.io/v1beta1
+      kind: Cluster
+      metadata:
+        name: mops-cluster
+      spec:
+        api:
+          port: 8443
