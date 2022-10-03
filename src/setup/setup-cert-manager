@@ -6,7 +6,18 @@ if [ "$#" -ne 1 ] ; then
 fi
 set -e
 email=$1
+
+echo "installing cert manager ..."
 kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.9.1/cert-manager.yaml
+
+echo
+echo "await startup ..."
+kubectl wait deployment -n cert-manager cert-manager --for condition=Available=True --timeout=90s
+kubectl wait deployment -n cert-manager cert-manager-cainjector cert-manager-webhook --for condition=Available=True --timeout=90s
+kubectl wait deployment -n cert-manager cert-manager-webhook --for condition=Available=True --timeout=90s
+
+echo
+echo "installing let's encrypt issuer with email ${email}"
 
 file=file.txt
 cat >$file <<PART1
@@ -29,4 +40,6 @@ cat >>$file <<PART2
 PART2
 kubectl apply -f $file
 rm $file
+
+echo
 echo "done, check with 'kubectl describe ClusterIssuer'"
