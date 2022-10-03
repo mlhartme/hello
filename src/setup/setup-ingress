@@ -12,4 +12,4 @@ export HTTPS_PORT=$(kubectl get service/ingress-nginx-controller -n ingress-ngin
 echo "mapping node ports ${HTTP_PORT}/${HTTPS_PORT} to 80/443 ..."
 cat port-forward.yaml | envsubst | kubectl apply -f -
 
-echo "done"
+echo "ingress setup done."
