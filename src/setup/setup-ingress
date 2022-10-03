@@ -6,6 +6,9 @@ echo "  see https://github.com/kubernetes/ingress-nginx"
 echo "  see https://docs.k0sproject.io/v1.22.1+k0s.1/examples/nginx-ingress/"
 kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.1.3/deploy/static/provider/baremetal/deploy.yaml
 
+# nginx is the only ingress controller, mark this in the configuration:
+kubectl -n ingress-nginx annotate ingressclasses nginx ingressclass.kubernetes.io/is-default-class="true" 
+
 export HTTP_PORT=$(kubectl get service/ingress-nginx-controller -n ingress-nginx -o jsonpath='{.spec.ports[?(@.name=="http")].nodePort}')
 export HTTPS_PORT=$(kubectl get service/ingress-nginx-controller -n ingress-nginx -o jsonpath='{.spec.ports[?(@.name=="https")].nodePort}')
 
