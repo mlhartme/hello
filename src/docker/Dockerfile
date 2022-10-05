@@ -1,6 +1,6 @@
 FROM debian:bullseye-20220912-slim
 RUN apt-get update && \
-    apt-get install -y --no-install-recommends procps curl locales locales-all openjdk-17-jdk-headless
+    apt-get install -y --no-install-recommends procps curl locales locales-all openjdk-17-jre-headless
 WORKDIR /usr/local/src
 COPY maven/*.jar app.jar
 ENV LANG=de_DE.UTF-8
