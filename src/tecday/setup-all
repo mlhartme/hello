@@ -5,11 +5,10 @@ k0sctl apply
 k0sctl kubeconfig > ~/.kube/config
 
 # make sure there are nodes ...
-sleep 10
-
 echo "await node to be ready:"
+sleep 10
 kubectl wait --for=condition=Ready nodes --all --timeout=600s
 
 ./setup-ingress
 ./setup-cert-manager michael@schmizzolin.de
-helm install hello --set tls=true oci://ghcr.io/mlhartme/charts/hello --version 2.0.0-20221008-141203
+helm install hello oci://ghcr.io/mlhartme/charts/hello --version 2.0.0-20221008-171510
