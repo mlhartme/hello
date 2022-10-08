@@ -11,4 +11,4 @@ kubectl wait --for=condition=Ready nodes --all --timeout=600s
 
 ./setup-ingress
 ./setup-cert-manager michael@schmizzolin.de
-helm install hello oci://ghcr.io/mlhartme/charts/hello --version 2.0.0
+helm install hello --set tls=true oci://ghcr.io/mlhartme/charts/hello --version 2.0.0
