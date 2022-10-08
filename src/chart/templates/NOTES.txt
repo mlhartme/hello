@@ -1,3 +1,3 @@
-Welcome to Hello
+Hello World Web Application
 
 Homepage: https://github.com/mlhartme/hello
