@@ -3,9 +3,9 @@
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
-    <groupId>net.oneandone.maven.poms</groupId>
-    <artifactId>lazy-foss-parent</artifactId>
-    <version>1.5.2</version>
+    <groupId>de.schmizzolin.maven.poms</groupId>
+    <artifactId>parent</artifactId>
+    <version>1.6.0-SNAPSHOT</version>
     <relativePath />
   </parent>
 
@@ -199,14 +199,4 @@
       </build>
     </profile>
   </profiles>
-  <distributionManagement><!-- TODO: move to parent? -->
-    <snapshotRepository>
-      <id>sonatype-nexus-snapshots</id>
-      <url>https://s01.oss.sonatype.org/content/repositories/snapshots/</url>
-    </snapshotRepository>
-    <repository>
-      <id>sonatype-nexus-staging</id>
-      <url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/</url>
-    </repository>
-  </distributionManagement>
 </project>
