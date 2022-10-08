@@ -21,7 +21,6 @@ export HTTP_PORT=$(kubectl get service/ingress-nginx-controller -n ingress-nginx
 export HTTPS_PORT=$(kubectl get service/ingress-nginx-controller -n ingress-nginx -o jsonpath='{.spec.ports[?(@.name=="https")].nodePort}')
 
 echo "mapping node ports ${HTTP_PORT}/${HTTPS_PORT} to 80/443 ..."
-kubectl create namespace http-connector
 cat http-connector.yaml | envsubst | kubectl apply -f -
 
 echo
