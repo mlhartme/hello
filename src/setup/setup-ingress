@@ -16,12 +16,12 @@ export HTTP_PORT=$(kubectl get service/ingress-nginx-controller -n ingress-nginx
 export HTTPS_PORT=$(kubectl get service/ingress-nginx-controller -n ingress-nginx -o jsonpath='{.spec.ports[?(@.name=="https")].nodePort}')
 
 echo "mapping node ports ${HTTP_PORT}/${HTTPS_PORT} to 80/443 ..."
-cat port-forward.yaml | envsubst | kubectl apply -f -
+cat http-connector.yaml | envsubst | kubectl apply -f -
 
 echo
 echo "await startup ..."
 kubectl wait deployment -n ingress-nginx ingress-nginx-controller --for condition=Available=True --timeout=90s
-kubectl wait deployment -n ingress-nginx port-forward --for condition=Available=True --timeout=90s
+kubectl wait deployment -n ingress-nginx http-connector --for condition=Available=True --timeout=90s
 
 echo
 echo "ingress setup done."

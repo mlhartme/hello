@@ -1,19 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: port-forward
+  name: http-connector
   namespace: ingress-nginx
   labels:
-    app: port-forward
+    app: http-connector
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: port-forward
+      app: http-connector
   template:
     metadata:
       labels:
-        app: port-forward
+        app: http-connector
     spec:
       hostNetwork: true
       containers:
