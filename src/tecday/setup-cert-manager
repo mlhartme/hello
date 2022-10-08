@@ -16,11 +16,11 @@ kubectl wait deployment -n cert-manager cert-manager --for condition=Available=T
 kubectl wait deployment -n cert-manager cert-manager-cainjector cert-manager-webhook --for condition=Available=True --timeout=90s
 kubectl wait deployment -n cert-manager cert-manager-webhook --for condition=Available=True --timeout=90s
 
+export EMAIL=$1
 echo
-echo "configuring let's encrypt issuer with email ${email}"
+echo "configuring let's encrypt issuer with email ${EMAIL}"
 echo "as documented here: https://cert-manager.io/docs/configuration/acme/"
 
-export EMAIL=$1
 cat cluster-issuer.yaml | envsubst | kubectl apply -f -
 
 echo
