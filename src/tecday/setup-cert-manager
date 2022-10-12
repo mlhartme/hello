@@ -1,9 +1,15 @@
 #!/bin/sh
-if [ "$#" -ne 1 ] ; then
+if [ "$#" -ne 2 ] ; then
   echo "installs cert-manager and a letencrypt issuer into the current kubernetes context"
-  echo "usage: cert-manager <email>"
+  echo "usage: cert-manager <email> prod|stage"
   exit 1
 fi
+issuer="cluster-issuer-$2.yaml"
+if [ ! -f ${issuer} ] ; then
+  echo "unknown type $2, use prod or stage."
+  exit 1
+fi
+
 set -e
 
 echo "installing cert manager ..."
@@ -21,7 +27,7 @@ echo
 echo "configuring let's encrypt issuer with email ${EMAIL}"
 echo "as documented here: https://cert-manager.io/docs/configuration/acme/"
 
-cat cluster-issuer.yaml | envsubst | kubectl apply -f -
+cat ${issuer} | envsubst | kubectl apply -f -
 
 echo
 echo "done, check with 'kubectl describe ClusterIssuer'"
